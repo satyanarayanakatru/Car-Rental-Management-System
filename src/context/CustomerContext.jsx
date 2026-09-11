@@ -10,8 +10,16 @@ export const CustomerProvider = ({ children }) => {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    const data = customerService.getCustomers();
-    setCustomers(data);
+    const fetchCustomers = async () => {
+      try {
+        const data = await customerService.getCustomers();
+        setCustomers(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error('Failed to fetch customers:', err);
+        setCustomers([]);
+      }
+    };
+    fetchCustomers();
   }, []);
 
   const saveAndSetCustomers = (updated) => {
@@ -42,13 +50,14 @@ export const CustomerProvider = ({ children }) => {
   };
 
   const filteredCustomers = useMemo(() => {
+    if (!Array.isArray(customers)) return [];
     return customers.filter((c) => {
       const term = searchTerm.toLowerCase();
       return (
-        c.name.toLowerCase().includes(term) ||
-        c.email.toLowerCase().includes(term) ||
-        c.mobile.includes(term) ||
-        c.licenseNumber.toLowerCase().includes(term)
+        (c.name && c.name.toLowerCase().includes(term)) ||
+        (c.email && c.email.toLowerCase().includes(term)) ||
+        (c.mobile && c.mobile.includes(term)) ||
+        (c.licenseNumber && c.licenseNumber.toLowerCase().includes(term))
       );
     });
   }, [customers, searchTerm]);

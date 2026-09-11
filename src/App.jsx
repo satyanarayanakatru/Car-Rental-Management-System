@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AuthProvider } from './context/AuthContext';
 import { CarProvider } from './context/CarContext';
 import { CustomerProvider } from './context/CustomerContext';
+import { BookingProvider } from './context/BookingContext';
 
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Sidebar from './components/common/Sidebar';
@@ -17,6 +18,7 @@ import DashboardPage from './pages/DashboardPage';
 import CarsPage from './pages/CarsPage';
 import CarDetailPage from './pages/CarDetailPage';
 import CustomersPage from './pages/CustomersPage';
+import BookingPage from './pages/BookingPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -41,78 +43,91 @@ function App() {
     <AuthProvider>
       <CarProvider>
         <CustomerProvider>
-          <Router>
-            <Routes>
-              {/* Public Auth Routes */}
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+          <BookingProvider>
+            <Router>
+              <Routes>
+                {/* Public Auth Routes */}
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
-              {/* Protected App Routes */}
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Dashboard">
-                      <DashboardPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                {/* Protected App Routes */}
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Dashboard">
+                        <DashboardPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="/cars"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Car Inventory">
-                      <CarsPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/cars"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Car Inventory">
+                        <CarsPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="/cars/:id"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Car Details">
-                      <CarDetailPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/cars/:id"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Car Details">
+                        <CarDetailPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="/customers"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout pageTitle="Customers">
-                      <CustomersPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
+                <Route
+                  path="/customers"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Customers">
+                        <CustomersPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              {/* Root redirect */}
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route
+                  path="/bookings/new"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="New Rental Booking">
+                        <BookingPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
 
-              {/* 404 Catch All */}
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Router>
+                {/* Root redirect */}
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-          {/* Global Toast Feedback Container */}
-          <ToastContainer
-            position="top-right"
-            autoClose={3500}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
+                {/* 404 Catch All */}
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Router>
+
+            {/* Global Toast Feedback Container */}
+            <ToastContainer
+              position="top-right"
+              autoClose={3500}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+          </BookingProvider>
         </CustomerProvider>
       </CarProvider>
     </AuthProvider>

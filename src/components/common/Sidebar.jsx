@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Car, Users, LogOut, Shield, Zap } from 'lucide-react';
+import { LayoutDashboard, Car, Users, Key, LogOut, Shield, Zap } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
@@ -15,7 +15,8 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Car Fleet', path: '/cars', icon: Car },
-    { name: 'Customers', path: '/customers', icon: Users }
+    { name: 'Customers', path: '/customers', icon: Users },
+    { name: 'Rent a Car', path: '/bookings/new', icon: Key }
   ];
 
   return (
