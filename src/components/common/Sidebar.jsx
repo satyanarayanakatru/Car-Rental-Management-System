@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Car, Users, Key, LogOut, Shield, Zap } from 'lucide-react';
+import { LayoutDashboard, Car, Users, Key, Clock, LogOut, Shield, Zap } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
@@ -16,7 +16,8 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Car Fleet', path: '/cars', icon: Car },
     { name: 'Customers', path: '/customers', icon: Users },
-    { name: 'Rent a Car', path: '/bookings/new', icon: Key }
+    { name: 'Rent a Car', path: '/rent', icon: Key },
+    { name: 'Booking History', path: '/bookings', icon: Clock }
   ];
 
   return (
@@ -42,7 +43,7 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
             </div>
             <div>
               <h1 className="font-extrabold text-lg text-white tracking-wider flex items-center gap-1">
-                VELOCITY <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                SATYA <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
               </h1>
               <p className="text-[10px] uppercase font-bold text-indigo-400 tracking-widest">Car Rentals</p>
             </div>
@@ -73,6 +74,7 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                end
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-3.5 py-3 rounded-xl font-medium text-sm transition-all duration-200 ${

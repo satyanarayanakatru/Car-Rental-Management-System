@@ -51,7 +51,7 @@ const LoginPage = () => {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-500 text-white shadow-xl shadow-indigo-500/30 mb-4">
           <Car className="w-9 h-9" />
         </div>
-        <h2 className="text-3xl font-extrabold text-white tracking-tight">Sign in to Velocity</h2>
+        <h2 className="text-3xl font-extrabold text-white tracking-tight">Sign in to Satya Car Rentals</h2>
         <p className="mt-2 text-sm text-slate-400">Manage car inventory, bookings, and customer fleet seamlessly</p>
       </div>
 

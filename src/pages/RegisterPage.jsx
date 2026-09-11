@@ -56,7 +56,7 @@ const RegisterPage = () => {
           <Car className="w-9 h-9" />
         </div>
         <h2 className="text-3xl font-extrabold text-white tracking-tight">Create Fleet Account</h2>
-        <p className="mt-2 text-sm text-slate-400">Join Velocity to start managing car rentals & customers</p>
+        <p className="mt-2 text-sm text-slate-400">Join Satya Car Rentals to start managing car rentals & customers</p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10">

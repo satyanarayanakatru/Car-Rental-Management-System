@@ -19,6 +19,7 @@ import CarsPage from './pages/CarsPage';
 import CarDetailPage from './pages/CarDetailPage';
 import CustomersPage from './pages/CustomersPage';
 import BookingPage from './pages/BookingPage';
+import BookingHistoryPage from './pages/BookingHistoryPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -96,7 +97,7 @@ function App() {
                 />
 
                 <Route
-                  path="/bookings/new"
+                  path="/rent"
                   element={
                     <ProtectedRoute>
                       <AppLayout pageTitle="New Rental Booking">
@@ -105,6 +106,20 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+
+                <Route
+                  path="/bookings"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Booking History">
+                        <BookingHistoryPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Legacy redirect for /bookings/new */}
+                <Route path="/bookings/new" element={<Navigate to="/rent" replace />} />
 
                 {/* Root redirect */}
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />

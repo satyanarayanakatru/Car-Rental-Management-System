@@ -105,12 +105,27 @@ export const BookingProvider = ({ children }) => {
     updateCar(target.carId, { availabilityStatus: 'Available' });
   };
 
+  const completeBooking = (bookingId) => {
+    const bookingList = Array.isArray(bookings) ? bookings : [];
+    const target = bookingList.find((b) => b.id === bookingId);
+    if (!target) return;
+
+    const updated = bookingList.map((b) =>
+      b.id === bookingId ? { ...b, status: 'Completed' } : b
+    );
+    saveAndSetBookings(updated);
+
+    // Set car back to available
+    updateCar(target.carId, { availabilityStatus: 'Available' });
+  };
+
   return (
     <BookingContext.Provider
       value={{
         bookings,
         createBooking,
         cancelBooking,
+        completeBooking,
         isCarAvailableForDates
       }}
     >
