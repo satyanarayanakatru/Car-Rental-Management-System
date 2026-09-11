@@ -15,7 +15,7 @@ export const CustomerProvider = ({ children }) => {
         const data = await customerService.getCustomers();
         setCustomers(Array.isArray(data) ? data : []);
       } catch (err) {
-        console.error('Failed to fetch customers:', err);
+        console.error('Failed to fetch customers from API:', err);
         setCustomers([]);
       }
     };
@@ -27,24 +27,21 @@ export const CustomerProvider = ({ children }) => {
     customerService.saveCustomersToStorage(updated);
   };
 
-  const addCustomer = (customerData) => {
-    const newCustomer = {
-      ...customerData,
-      id: `cust-${Date.now()}`,
-      status: customerData.status || 'Active',
-      registeredDate: new Date().toISOString().split('T')[0]
-    };
+  const addCustomer = async (customerData) => {
+    const newCustomer = await customerService.addCustomer(customerData);
     const updated = [newCustomer, ...customers];
     saveAndSetCustomers(updated);
     return newCustomer;
   };
 
-  const updateCustomer = (id, customerData) => {
+  const updateCustomer = async (id, customerData) => {
+    await customerService.updateCustomer(id, customerData);
     const updated = customers.map((c) => (c.id === id ? { ...c, ...customerData } : c));
     saveAndSetCustomers(updated);
   };
 
-  const deleteCustomer = (id) => {
+  const deleteCustomer = async (id) => {
+    await customerService.deleteCustomer(id);
     const updated = customers.filter((c) => c.id !== id);
     saveAndSetCustomers(updated);
   };
@@ -56,7 +53,7 @@ export const CustomerProvider = ({ children }) => {
       return (
         (c.name && c.name.toLowerCase().includes(term)) ||
         (c.email && c.email.toLowerCase().includes(term)) ||
-        (c.mobile && c.mobile.includes(term)) ||
+        (c.mobile && String(c.mobile).includes(term)) ||
         (c.licenseNumber && c.licenseNumber.toLowerCase().includes(term))
       );
     });
