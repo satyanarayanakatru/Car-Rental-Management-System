@@ -20,6 +20,7 @@ import CarDetailPage from './pages/CarDetailPage';
 import CustomersPage from './pages/CustomersPage';
 import BookingPage from './pages/BookingPage';
 import BookingHistoryPage from './pages/BookingHistoryPage';
+import AvailabilityPage from './pages/AvailabilityPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -113,6 +114,17 @@ function App() {
                     <ProtectedRoute>
                       <AppLayout pageTitle="Booking History">
                         <BookingHistoryPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/availability"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Car Availability">
+                        <AvailabilityPage />
                       </AppLayout>
                     </ProtectedRoute>
                   }
