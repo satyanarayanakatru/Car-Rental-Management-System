@@ -21,6 +21,7 @@ import CustomersPage from './pages/CustomersPage';
 import BookingPage from './pages/BookingPage';
 import BookingHistoryPage from './pages/BookingHistoryPage';
 import AvailabilityPage from './pages/AvailabilityPage';
+import ReportsPage from './pages/ReportsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -125,6 +126,17 @@ function App() {
                     <ProtectedRoute>
                       <AppLayout pageTitle="Car Availability">
                         <AvailabilityPage />
+                      </AppLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/reports"
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout pageTitle="Reports & Analytics">
+                        <ReportsPage />
                       </AppLayout>
                     </ProtectedRoute>
                   }

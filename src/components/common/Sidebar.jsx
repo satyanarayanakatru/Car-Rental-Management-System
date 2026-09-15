@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Car, Users, Key, Clock, ShieldCheck, LogOut, Shield, Zap } from 'lucide-react';
+import { LayoutDashboard, Car, Users, Key, Clock, ShieldCheck, BarChart3, LogOut, Shield, Zap } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,8 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
     { name: 'Customers', path: '/customers', icon: Users },
     { name: 'Rent a Car', path: '/rent', icon: Key },
     { name: 'Booking History', path: '/bookings', icon: Clock },
-    { name: 'Car Availability', path: '/availability', icon: ShieldCheck }
+    { name: 'Car Availability', path: '/availability', icon: ShieldCheck },
+    { name: 'Reports & Analytics', path: '/reports', icon: BarChart3 }
   ];
 
   return (
