@@ -1,6 +1,7 @@
 import React from 'react';
-import { Menu, Bell, Search, Sparkles } from 'lucide-react';
+import { Menu, Bell, Sparkles } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import Breadcrumbs from './Breadcrumbs';
 
 const Navbar = ({ setMobileOpen, pageTitle }) => {
   const { user } = useAuth();
@@ -16,11 +17,14 @@ const Navbar = ({ setMobileOpen, pageTitle }) => {
           <Menu className="w-6 h-6" />
         </button>
 
-        <div className="flex items-center gap-2">
-          <h2 className="text-xl font-bold text-white tracking-tight">{pageTitle}</h2>
-          <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Operational
-          </span>
+        <div className="flex flex-col justify-center">
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-extrabold text-white tracking-tight">{pageTitle}</h2>
+            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Operational
+            </span>
+          </div>
+          <Breadcrumbs />
         </div>
       </div>
 

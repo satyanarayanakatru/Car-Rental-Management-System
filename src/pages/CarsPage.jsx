@@ -5,8 +5,10 @@ import CarCard from '../components/cars/CarCard';
 import CarFilterBar from '../components/cars/CarFilterBar';
 import CarFormModal from '../components/cars/CarFormModal';
 import ConfirmDialog from '../components/common/ConfirmDialog';
+import SkeletonLoader from '../components/common/SkeletonLoader';
+import EmptyState from '../components/common/EmptyState';
 import { toast } from 'react-toastify';
-import { Plus, Car as CarIcon, AlertCircle, RefreshCw, Layers } from 'lucide-react';
+import { Plus, Car as CarIcon, AlertCircle, RefreshCw, Search } from 'lucide-react';
 
 const CarsPage = () => {
   const { filteredCars, loading, error, addCar, updateCar, deleteCar, refetchCars } = useCars();
@@ -84,13 +86,8 @@ const CarsPage = () => {
       {/* Filters Toolbar */}
       <CarFilterBar />
 
-      {/* Loading State */}
-      {loading && (
-        <div className="py-20 text-center space-y-4">
-          <div className="inline-block w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
-          <p className="text-slate-400 text-sm font-medium">Loading car fleet database...</p>
-        </div>
-      )}
+      {/* Loading Skeleton */}
+      {loading && <SkeletonLoader type="card" count={8} />}
 
       {/* Error State */}
       {error && !loading && (
@@ -111,15 +108,13 @@ const CarsPage = () => {
       {!loading && !error && (
         <>
           {filteredCars.length === 0 ? (
-            <div className="py-16 text-center bg-slate-900/50 border border-slate-800 rounded-3xl p-8 space-y-3">
-              <div className="w-16 h-16 bg-slate-800 text-slate-500 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Layers className="w-8 h-8" />
-              </div>
-              <h3 className="text-lg font-bold text-white">No Vehicles Match Your Search</h3>
-              <p className="text-slate-400 text-xs max-w-md mx-auto">
-                Try adjusting your brand, fuel type, transmission filters, or search term to discover cars in fleet.
-              </p>
-            </div>
+            <EmptyState
+              icon={Search}
+              title="No Vehicles Match Your Search"
+              description="Try adjusting your brand, fuel type, transmission filters, or search keyword to discover cars in fleet."
+              actionLabel="Add New Car"
+              onAction={handleOpenAddModal}
+            />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredCars.map((car) => (

@@ -4,8 +4,9 @@ import { useCustomers } from '../context/CustomerContext';
 import CustomerFormModal from '../components/customers/CustomerFormModal';
 import ConfirmDialog from '../components/common/ConfirmDialog';
 import Pagination from '../components/common/Pagination';
+import EmptyState from '../components/common/EmptyState';
 import { toast } from 'react-toastify';
-import { Users, UserPlus, Search, Edit3, Trash2, Mail, Phone, ShieldCheck, MapPin, CreditCard } from 'lucide-react';
+import { Users, UserPlus, Search, Edit3, Trash2, Mail, Phone, CreditCard, MapPin } from 'lucide-react';
 
 const CustomersPage = () => {
   const {
@@ -109,11 +110,13 @@ const CustomersPage = () => {
       {/* Customer Data Table */}
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl overflow-hidden">
         {paginatedCustomers.length === 0 ? (
-          <div className="py-16 text-center text-slate-400 text-sm">
-            <Users className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <p className="font-semibold text-slate-300">No Customers Found</p>
-            <p className="text-xs text-slate-500 mt-1">Try refining your search keyword or register a new customer.</p>
-          </div>
+          <EmptyState
+            icon={Users}
+            title="No Customers Found"
+            description="Try refining your search query or click below to register a new customer profile."
+            actionLabel="Register Customer"
+            onAction={handleOpenAdd}
+          />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-300">
